@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import { Search, Plus, Filter, Edit, Eye, Trash2 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import ClienteModalForm from '../../components/clientes/ClienteModalForm';
 
 const ClientesList = () => {
   // --- MOCK DATA ---
   const clientesMock = [
-    { id: 1, nombre: 'Carlos Ruiz', dni: '74839201', correo: 'carlos.ruiz@gmail.com', telefono: '987654321', mascotas: 'Max (Perro)' },
+    { id: 1, nombre: 'Carlos Ruiz', dni: '74839201', correo: 'carlos.ruiz@gmail.com', telefono: '987654321', mascotas: 'Max (Perro), Pelusa (Gato)' },
     { id: 2, nombre: 'Ana Gómez', dni: '45291038', correo: 'ana.gomez@hotmail.com', telefono: '951234567', mascotas: 'Luna (Gato)' },
     { id: 3, nombre: 'Luis Fernando', dni: '10293847', correo: 'luis.f@outlook.com', telefono: '963852741', mascotas: 'Rocky (Perro)' },
     { id: 4, nombre: 'María López', dni: '09876543', correo: 'maria.l@gmail.com', telefono: '912345678', mascotas: 'Coco (Loro)' },
   ];
 
   // --- ESTADOS ---
+  const navigate = useNavigate();
   const [busqueda, setBusqueda] = useState('');
   const [modalOpen, setModalOpen] = useState(false);
   const [clienteSeleccionado, setClienteSeleccionado] = useState(null);
@@ -98,11 +100,13 @@ const ClientesList = () => {
                   </td>
                   <td className="p-4">
                     <div className="flex items-center justify-center gap-1.5">
-                      <button className="p-2 text-slate-500 hover:bg-slate-100 rounded-xl transition-colors" title="Ver Detalle 360°">
+                      <button onClick={() => {
+                          navigate(`/clientes/${cliente.id}`);
+                        }}
+                        className="p-2 text-slate-500 hover:bg-slate-100 rounded-xl transition-colors" title="Ver Detalle 360°">
                         <Eye size={16} />
                       </button>
                       <button 
-                        onClick={() => handleEditarCliente(cliente)}
                         className="p-2 text-slate-500 hover:bg-slate-100 rounded-xl transition-colors" 
                         title="Editar"
                       >

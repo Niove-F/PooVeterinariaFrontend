@@ -3,12 +3,13 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import MainLayout from '../components/layout/MainLayout';
 import Dashboard from '../views/Dashboard/Dashboard';
 import ClientesList from '../views/Clientes/ClientesList';
+import ClienteDetail from '../views/Clientes/ClienteDetail';
+import CitasCalendario from '../views/Citas/CitasCalendario';
 
 const AppRouter = () => {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Capturamos todas las rutas internas en el cascarón de la app */}
         <Route 
           path="/*" 
           element={
@@ -16,7 +17,9 @@ const AppRouter = () => {
               <Routes>
                 <Route path="dashboard" element={<Dashboard />} />
                 <Route path="clientes" element={<ClientesList />} />
-                
+                <Route path="clientes/:id" element={<ClienteDetail />} />
+                <Route path="citas" element={<CitasCalendario />} />
+
                 {/* Redirección automática por si entran a una ruta que no existe */}
                 <Route path="*" element={<Navigate to="/dashboard" replace />} />
               </Routes>
